@@ -46,30 +46,34 @@ const Sidebar: React.FC<SidebarProps> = ({ user, onLogout, isAdmin }) => {
             <p className="text-sm font-medium">Dashboard</p>
           </NavLink>
 
-          <NavLink to="/teachers" className={getLinkClass('/teachers')}>
-            <span className={getIconClass('/teachers')}>groups</span>
-            <p className="text-sm font-medium">Professores</p>
-          </NavLink>
+          {user.role !== 'Aluno' && (
+            <>
+              <NavLink to="/teachers" className={getLinkClass('/teachers')}>
+                <span className={getIconClass('/teachers')}>groups</span>
+                <p className="text-sm font-medium">Professores</p>
+              </NavLink>
 
-          <NavLink to="/students" className={getLinkClass('/students')}>
-            <span className={getIconClass('/students')}>person_add</span>
-            <p className="text-sm font-medium">Alunos</p>
-          </NavLink>
+              <NavLink to="/students" className={getLinkClass('/students')}>
+                <span className={getIconClass('/students')}>person_add</span>
+                <p className="text-sm font-medium">Alunos</p>
+              </NavLink>
 
-          <NavLink to="/disciplines" className={getLinkClass('/disciplines')}>
-            <span className={getIconClass('/disciplines')}>book</span>
-            <p className="text-sm font-medium">Disciplinas</p>
-          </NavLink>
+              <NavLink to="/disciplines" className={getLinkClass('/disciplines')}>
+                <span className={getIconClass('/disciplines')}>book</span>
+                <p className="text-sm font-medium">Disciplinas</p>
+              </NavLink>
 
-          <NavLink to="/allocation" className={getLinkClass('/allocation')}>
-            <span className={getIconClass('/allocation')}>school</span>
-            <p className="text-sm font-medium">Alocação</p>
-          </NavLink>
+              <NavLink to="/allocation" className={getLinkClass('/allocation')}>
+                <span className={getIconClass('/allocation')}>school</span>
+                <p className="text-sm font-medium">Alocação</p>
+              </NavLink>
 
-          <NavLink to="/workshops" className={getLinkClass('/workshops')}>
-            <span className={getIconClass('/workshops')}>lightbulb</span>
-            <p className="text-sm font-medium">Oficinas</p>
-          </NavLink>
+              <NavLink to="/workshops" className={getLinkClass('/workshops')}>
+                <span className={getIconClass('/workshops')}>lightbulb</span>
+                <p className="text-sm font-medium">Oficinas</p>
+              </NavLink>
+            </>
+          )}
 
           {isAdmin && (
             <NavLink to="/admin" className={getLinkClass('/admin')}>

@@ -2,8 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, Tooltip, CartesianGrid } from 'recharts';
 import { supabase } from '../services/supabase';
 import Calendar from '../components/Calendar';
+import StudentDashboard from '../components/StudentDashboard';
+import { User } from '../types';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  userProfile?: User | null;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ userProfile }) => {
   const [stats, setStats] = useState({
     students: 0,
     teachers: 0,
@@ -12,6 +18,21 @@ const Dashboard: React.FC = () => {
   const [title, setTitle] = useState('Painel Administrativo');
   const [academicYear, setAcademicYear] = useState(new Date().getFullYear().toString());
   const [loading, setLoading] = useState(true);
+
+  // If student, render student dashboard
+  if (userProfile?.role === 'Aluno') {
+    return (
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-text-main dark:text-white">Olá, {userProfile.name}!</h1>
+            <p className="text-text-secondary dark:text-slate-400">Bem-vindo ao seu painel do aluno.</p>
+          </div>
+          <StudentDashboard studentId={Number(userProfile.id)} />
+        </div>
+      </div>
+    );
+  }
 
   // Mock chart data for now as we don't have enough real data for a good chart
   const data = [

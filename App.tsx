@@ -121,7 +121,7 @@ const App: React.FC = () => {
 
           <Route
             path="/dashboard"
-            element={isAuthenticated ? <Layout onLogout={handleLogout} isAdmin={isAdmin} userProfile={userProfile}><Dashboard /></Layout> : <Navigate to="/login" replace />}
+            element={isAuthenticated ? <Layout onLogout={handleLogout} isAdmin={isAdmin} userProfile={userProfile}><Dashboard userProfile={userProfile} /></Layout> : <Navigate to="/login" replace />}
           />
 
           <Route
